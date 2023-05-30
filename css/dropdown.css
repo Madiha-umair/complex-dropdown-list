@@ -1,0 +1,76 @@
+/* INLINE MENU WITH MULTI-LEVEL DROPDOWN */
+/* Using a .has-submenu class to auto-insert ">" in links
+   with submenus. */
+.has-submenu > a::after {
+  content:">";
+  margin-left:0.5em;
+  float:right;
+}
+
+
+#main-menu ul {
+  padding:0;
+}
+#main-menu li {
+  display: inline-block;
+  vertical-align: top;
+  margin-right:2em;
+  position:relative; /* so that the submenu displays relative to this */
+  padding-bottom:1em; /* account for gap from line 15 below so cursor doesn't "fall off" the LI before reaching the submenu */
+}
+#main-menu ul ul {
+  background-color:#ccc;
+  position:absolute;
+  left:-10000px;
+  top:2em;
+  width:150px;
+}
+#main-menu li li {
+  display: block;
+  padding: 0.5em 0.8em;
+  margin-right: 0; /* remove side margin added to all #main-menu LIs in line 8 above because the submenu doesn't need it */
+}
+#main-menu li:hover ul {
+  left:0;
+}
+
+/* Second level submenu (sub-submenu) */
+/* I left the :hover in the selector below to ensure it 
+works properly for the sub-submenu. Due to the :hover
+in the rule above (lines 23-25), the pseudo-class gives 
+that selector higher specificity and it overrides the 
+left:-10000px below without also adding the :hover in 
+the selector below. */
+#main-menu li:hover li ul {
+  left:-10000px;
+}
+#main-menu li li:hover ul {
+  /* align the sub-submenu like a fly-out menu (on the right) */
+  left:100%;
+  top:0;
+}
+
+/* Styling the menu - I've added this after so that
+ * there's no confusion as to the essential CSS for
+ * the dropdown and which are just for prettifying.
+ * I wouldn't say this is the prettiest menu but
+ * the extra colours are to show how you'd change that.
+ */
+#main-menu a,
+#main-menu a:visited {
+  font-family:Arial,Helvetica,sans-serif;
+  text-decoration:none;
+  color:#000;
+}
+#main-menu li:hover > a {
+  color:red;
+}
+#main-menu li li:hover {
+  background-color:#000;
+}
+#main-menu ul ul ul {
+  background-color:#333;
+}
+#main-menu ul ul ul a {
+  color:#fff;
+}
